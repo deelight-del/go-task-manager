@@ -2,7 +2,7 @@ package main
 
 import (
   "fmt"
-  "github.com/faith/color"
+  "github.com/fatih/color"
 )
 
 var count int = 0
