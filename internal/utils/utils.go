@@ -40,6 +40,12 @@ func ModifyStatus(id int, newStatus string) {
     fmt.Println("Unrecognized status")
     return
   }
+
+  if id >= len(tasks) {
+    //TODO: Throw and handle some error.
+    return
+  }
+
   (tasks[id]).status = newStatus
 }
 

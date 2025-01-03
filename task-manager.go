@@ -11,7 +11,7 @@ func main() {
 
   utils.AddTask("Washing Clothes")
   utils.AddTask("Ironing clothes")
-  utils.ModifyStatus(0, "completed")
+  //utils.ModifyStatus(0, "completed")
 
   if len(os.Args) < 2 {
     // TODO:Print to std error.
@@ -27,12 +27,11 @@ func main() {
   case "add":
     addCmd(args)
   case "list":
-    //TODO: use listCmd function that uses utils ListTask.
     listCmd(args)
   case "complete":
-    //TODO: use completeCmd function that uses utils ModifyStatus.
+    completeCmd(args)
   case "delete":
-    //TODO: use deleteCmd function that uses utils DeleteTask.
+    deleteCmd(args)
   default:
     //TODO: handle unknown command.
     fmt.Println("Unknown command.")
@@ -40,5 +39,6 @@ func main() {
   //addTask("Writing Codes.")
   //utils.DeleteTask(1)
   //utils.AddTask("Writing Codes.")
-  //utils.ListTasks()
+  //completeCmd([]string{"0"})
+  utils.ListTasks()
 }
