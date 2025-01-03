@@ -1,7 +1,7 @@
 package main
 
 import (
-  //"os"
+  "os"
   "fmt"
   "github.com/deelight-del/go-task-manager/internal/utils"
 )
@@ -11,9 +11,34 @@ func main() {
 
   utils.AddTask("Washing Clothes")
   utils.AddTask("Ironing clothes")
-  //addTask("Writing Codes.")
   utils.ModifyStatus(0, "completed")
-  utils.DeleteTask(1)
-  utils.AddTask("Writing Codes.")
-  utils.ListTasks()
+
+  if len(os.Args) < 2 {
+    // TODO:Print to std error.
+    // Or use fatih coloring
+    fmt.Println("Specify a command.Add, list or something at all.")
+    return
+  }
+
+  cmd := os.Args[1]
+  args := os.Args[2:]
+
+  switch cmd {
+  case "add":
+    addCmd(args)
+  case "list":
+    //TODO: use listCmd function that uses utils ListTask.
+    listCmd(args)
+  case "complete":
+    //TODO: use completeCmd function that uses utils ModifyStatus.
+  case "delete":
+    //TODO: use deleteCmd function that uses utils DeleteTask.
+  default:
+    //TODO: handle unknown command.
+    fmt.Println("Unknown command.")
+  }
+  //addTask("Writing Codes.")
+  //utils.DeleteTask(1)
+  //utils.AddTask("Writing Codes.")
+  //utils.ListTasks()
 }

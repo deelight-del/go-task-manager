@@ -45,7 +45,9 @@ func ModifyStatus(id int, newStatus string) {
 
 func ListTasks(filter ...string) {
   c := color.New(color.FgCyan, color.Bold)
+
   c.Printf("%-3s ------>    %-20s --- %10s\n", "ID", "Task", "Status")
+
   if len(filter) == 0 {
     for i, v := range(tasks) {
       fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.name, v.status)
@@ -63,7 +65,9 @@ func ListTasks(filter ...string) {
           fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.name, v.status)
         }
       }
+    } else {
+      fmt.Println("Unrecognized filter. Use pending or completed")
     }
-    fmt.Println("filter applied.")
+    //fmt.Println("filter applied.")
   }
 }
