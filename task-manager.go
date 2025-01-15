@@ -7,16 +7,21 @@ import (
 )
 
 func main() {
+
+  //Load file and load content.
+  utils.LoadTasks()
+
   fmt.Println("Welcome to your favorite task manager")
 
-  utils.AddTask("Washing Clothes")
-  utils.AddTask("Ironing clothes")
+  //utils.AddTask("Washing Clothes")
+  //utils.AddTask("Ironing clothes")
   //utils.ModifyStatus(0, "completed")
 
   if len(os.Args) < 2 {
     // TODO:Print to std error.
     // Or use fatih coloring
-    fmt.Println("Specify a command.Add, list or something at all.")
+    fmt.Println("Specify a command. Add, list or something at all.")
+    utils.SaveTasks()
     return
   }
 
@@ -40,5 +45,6 @@ func main() {
   //utils.DeleteTask(1)
   //utils.AddTask("Writing Codes.")
   //completeCmd([]string{"0"})
-  utils.ListTasks()
+  //utils.ListTasks()
+  utils.SaveTasks()
 }

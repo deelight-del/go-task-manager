@@ -3,15 +3,32 @@ package utils
 import (
   "fmt"
   "github.com/fatih/color"
+  "encoding/json"
+  "os"
 )
 
 //var count int = 0
 
 type task struct {
-  name, status string
+  Name, Status string
 }
 
 var tasks = make([]*task, 0)
+
+func SaveTasks() {
+  fmt.Println("The tasks as at save", tasks)
+  f, err := os.Create("file.json")
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer f.Close()
+  enc := json.NewEncoder(f)
+  if err := enc.Encode(&tasks); err != nil {
+    fmt.Println(err)
+    return
+  }
+}
 
 func AddTask(name string) {
   //Create task struct.
@@ -40,7 +57,7 @@ func ModifyStatus(id int, newStatus string) {
     fmt.Println("Unrecognized status")
     return
   }
-  (tasks[id]).status = newStatus
+  (tasks[id]).Status = newStatus
 }
 
 func ListTasks(filter ...string) {
@@ -48,19 +65,19 @@ func ListTasks(filter ...string) {
   c.Printf("%-3s ------>    %-20s --- %10s\n", "ID", "Task", "Status")
   if len(filter) == 0 {
     for i, v := range(tasks) {
-      fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.name, v.status)
+      fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.Name, v.Status)
     }
   } else {
     if filter[0] == "pending" {
       for i, v := range(tasks) {
-        if v.status == "pending" {
-          fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.name, v.status)
+        if v.Status == "pending" {
+          fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.Name, v.Status)
         }
       }
     } else if filter[0] == "completed" {
       for i, v := range(tasks) {
-        if v.status == "completed" {
-          fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.name, v.status)
+        if v.Status == "completed" {
+          fmt.Printf("%-3d ------>    %-20s --- %10s\n", i, v.Name, v.Status)
         }
       }
     }
